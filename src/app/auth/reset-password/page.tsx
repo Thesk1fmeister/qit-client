@@ -88,7 +88,7 @@ const ResetPasswordPage = () => {
             </div>
             <p>Please check your email to reset your password.</p>
             <div className='mt-4'>
-              <span>Didn't receive it? </span>
+              <span>Didn&apos;t receive it? </span>
               <button className='text-primary-blue underline' onClick={() => handleSubmit(onSubmit)()}>
                 Send again
               </button>

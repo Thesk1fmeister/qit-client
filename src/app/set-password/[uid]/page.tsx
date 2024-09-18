@@ -89,6 +89,7 @@ const SetNewPassword = () => {
                     {showPassword ? <MyxIcon name='eye' /> : <MyxIcon name='eyeOff' />}
                   </button>
                 </div>
+                {/* @ts-ignore */}
                 {errors.new_password && <span className='text-red-500 text-xs'>{errors.new_password.message}</span>}
               </div>
 
@@ -116,6 +117,7 @@ const SetNewPassword = () => {
                     {showRepeatPassword ? <MyxIcon name='eye' /> : <MyxIcon name='eyeOff' />}
                   </button>
                 </div>
+                {/* @ts-ignore */}
                 {errors.repeat_password && <span className='text-red-500 text-xs'>{errors.repeat_password.message}</span>}
               </div>
 
