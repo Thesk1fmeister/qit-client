@@ -12,7 +12,7 @@ const Navigation = () => {
           </li>
         ))}
       </ul>
-      <div>social</div>
+      {/* <div>social</div> */}
     </div>
   )
 }

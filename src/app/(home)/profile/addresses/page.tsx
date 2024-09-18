@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 import { Input } from '@/components/ui/Input/Input'
 import { Button } from '@/components/ui/Button/Button'
+import PageHeader from '@/components/PageHeader/PageHeader'
 
 const AddressBookPage = () => {
   const [showShippingForm, setShowShippingForm] = useState(false)
@@ -71,7 +72,7 @@ const AddressBookPage = () => {
 
   return (
     <div className='flex w-full h-full flex-col gap-8'>
-      <h1>Address book</h1>
+      <PageHeader title='Address book' />
 
       {/* SHIPPING ADDRESS */}
       <div>

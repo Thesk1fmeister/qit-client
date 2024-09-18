@@ -29,20 +29,20 @@ const AuthForm = () => {
     mode: 'onChange',
   })
 
-  useEffect(() => {
-    const savedEmail = localStorage.getItem('myxx_email')
-    const savedPassword = localStorage.getItem('myxx_password')
-    const savedRememberMe = localStorage.getItem('myxx_rememberMe') === 'true'
-    if (savedEmail) {
-      setValue('email', savedEmail)
-    }
-    if (savedPassword) {
-      setValue('password', savedPassword)
-    }
-    setRememberMe(savedRememberMe)
+  // useEffect(() => {
+  //   const savedEmail = localStorage.getItem('myxx_email')
+  //   const savedPassword = localStorage.getItem('myxx_password')
+  //   const savedRememberMe = localStorage.getItem('myxx_rememberMe') === 'true'
+  //   if (savedEmail) {
+  //     setValue('email', savedEmail)
+  //   }
+  //   if (savedPassword) {
+  //     setValue('password', savedPassword)
+  //   }
+  //   setRememberMe(savedRememberMe)
 
-    trigger(['email', 'password'])
-  }, [setValue, trigger])
+  //   trigger(['email', 'password'])
+  // }, [setValue, trigger])
 
   const onSubmit = async (data: any) => {
     if (rememberMe) {

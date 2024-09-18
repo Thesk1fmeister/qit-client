@@ -127,8 +127,11 @@ const ProfilePage = () => {
 
   const onSubmitPasswordChange = async (data: TPasswordChange) => {
     // delete data?.new_password
+    const payload = {
+      password: data.new_password,
+    }
     try {
-      await patchProfile(data).unwrap()
+      await patchProfile(payload).unwrap()
       toast(t => (
         <CustomToaster
           variant='success'
