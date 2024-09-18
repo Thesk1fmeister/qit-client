@@ -41,7 +41,7 @@ const AddressBookPage = () => {
     },
   })
 
-  const onSubmit = data => {
+  const onSubmit = (data: any) => {
     if (showBillingForm) {
       setBillingData(data.billing_address)
       setShowBillingForm(false)
@@ -52,7 +52,7 @@ const AddressBookPage = () => {
     }
   }
 
-  const handleEdit = type => {
+  const handleEdit = (type: any) => {
     if (type === 'shipping') {
       setShowShippingForm(true)
     } else if (type === 'billing') {
@@ -60,7 +60,7 @@ const AddressBookPage = () => {
     }
   }
 
-  const renderAddress = address => (
+  const renderAddress = (address: any) => (
     <>
       <div>
         <div>{`${address.firstName} ${address.lastName}`}</div>

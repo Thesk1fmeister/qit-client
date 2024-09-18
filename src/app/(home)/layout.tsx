@@ -6,7 +6,6 @@ import { useEffect } from 'react'
 import { getFromStorage } from '@/utils/storage'
 import { usePathname, useRouter } from 'next/navigation'
 import { Toaster } from 'react-hot-toast'
-import { useLazyGetProfileQuery } from '@/api/Auth'
 import { storageKeys } from '@/constants/storage'
 import ProfileLayout from '@/components/layouts/ProfileLayout'
 
