@@ -10,25 +10,23 @@ import React from 'react'
 import { useForm } from 'react-hook-form'
 import toast, { Toaster } from 'react-hot-toast'
 import ClipLoader from 'react-spinners/ClipLoader'
-import { useLoginMutation } from '@/api/Auth'
+import { useLoginMutation, useResetMutation } from '@/api/Auth'
+import { MyxIcon } from '@/components/icons'
 
 const ResetPasswordPage = () => {
-  const [login, { isLoading: resetLoading, isSuccess }] = useLoginMutation()
-  // login change to reset password,
+  const [reset, { isLoading: resetLoading, isSuccess }] = useResetMutation()
 
   const {
     register,
     handleSubmit,
-    setValue,
-    trigger,
     formState: { errors, isValid },
-  } = useForm<TResetPassword>({
+  } = useForm({
     mode: 'onChange',
   })
 
   const onSubmit = async (data: any) => {
     try {
-      await login(data).unwrap()
+      await reset(data).unwrap()
     } catch (err: any) {
       toast(t => (
         <CustomToaster
@@ -37,7 +35,7 @@ const ResetPasswordPage = () => {
           dismiss={() => toast.dismiss(t.id)}
         />
       ))
-      console.error('Failed to login: ', err)
+      console.error('Failed to reset password: ', err)
     }
   }
 
@@ -49,35 +47,54 @@ const ResetPasswordPage = () => {
         subtitle={!isSuccess ? 'Enter your email address and we`ll send you a link to reset your password.' : ''}
         bgImage='/images/auth-bg.webp'
       >
-        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
-          <div className='flex flex-col gap-6'>
-            <div className='flex flex-col gap-1'>
-              <Label text='Email' />
-              <Input
-                placeholder='Please enter your e-mail'
-                type='email'
-                id='email'
-                {...register('email', {
-                  required: 'Email is required',
-                  pattern: {
-                    value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-                    message: 'Please enter a valid email address',
-                  },
-                  validate: value => {
-                    const noCyrillic = /^[^\u0400-\u04FF]+$/.test(value)
-                    return noCyrillic || 'Email must not contain Cyrillic characters'
-                  },
-                })}
-                className={`mt-1 block w-full px-3 py-2 border border-gray-300
+        {!isSuccess ? (
+          <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
+            <div className='flex flex-col gap-6'>
+              <div className='flex flex-col gap-1'>
+                <Label text='Email' />
+                <Input
+                  placeholder='Please enter your e-mail'
+                  type='email'
+                  id='email'
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                      message: 'Please enter a valid email address',
+                    },
+                    validate: value => {
+                      const noCyrillic = /^[^\u0400-\u04FF]+$/.test(value)
+                      return noCyrillic || 'Email must not contain Cyrillic characters'
+                    },
+                  })}
+                  className={`mt-1 block w-full px-3 py-2 border border-gray-300
                  rounded-md shadow-sm focus:outline-none sm:text-sm ${errors.email ? 'border-red-500' : ''}`}
-              />
-              {errors.email && <span className='text-red-500 text-xs'>{errors.email.message}</span>}
+                />
+                {/* @ts-ignore */}
+                {errors.email && <span className='text-red-500 text-xs'>{errors?.email?.message}</span>}
+              </div>
+              <Button type='submit' disabled={!isValid} className='!bg-primary-black'>
+                {resetLoading ? <ClipLoader size={24} color={'#fff'} /> : 'Continue'}
+              </Button>
             </div>
-            <Button type='submit' disabled={!isValid} className='!bg-primary-black'>
-              {resetLoading ? <ClipLoader size={24} color={'#fff'} /> : 'Continue'}
-            </Button>
+          </form>
+        ) : (
+          <div className='bg-secondary-white p-4 rounded-md'>
+            <div className='flex items-center gap-2'>
+              <MyxIcon name='mail' className='w-[20px] h-[16px]' />
+              <div>
+                <strong>Password reset link sent</strong>
+              </div>
+            </div>
+            <p>Please check your email to reset your password.</p>
+            <div className='mt-4'>
+              <span>Didn't receive it? </span>
+              <button className='text-primary-blue underline' onClick={() => handleSubmit(onSubmit)()}>
+                Send again
+              </button>
+            </div>
           </div>
-        </form>
+        )}
       </AuthLayout>
     </Providers>
   )

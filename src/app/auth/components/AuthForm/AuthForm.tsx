@@ -151,6 +151,9 @@ const AuthForm = () => {
               />
               <Label text='Remember me' className={'font-normal'} />
             </div>
+            <Link className='text-system-primary' href={`/auth/reset-password`}>
+              Forgot password?
+            </Link>
           </div>
           <Button type='submit' disabled={!isValid} className='!bg-primary-black'>
             {loginLoading ? <ClipLoader size={24} color={'#fff'} /> : 'Sign in'}

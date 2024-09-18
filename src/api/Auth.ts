@@ -27,6 +27,26 @@ export const authApi = mainApi.injectEndpoints({
       },
       transformResponse: saveAuthToken,
     }),
+    reset: builder.mutation({
+      query: data => {
+        return {
+          url: `/user/password/reset/`,
+          method: 'POST',
+          body: data,
+        }
+      },
+      transformResponse: saveAuthToken,
+    }),
+    confirmPassword: builder.mutation({
+      query: data => {
+        return {
+          url: `/user/password/reset/confirm/`,
+          method: 'POST',
+          body: data,
+        }
+      },
+      transformResponse: saveAuthToken,
+    }),
     getProfile: builder.query({
       query: () => ({
         url: `/user/me/`,
@@ -68,5 +88,12 @@ export const authApi = mainApi.injectEndpoints({
   }),
 })
 
-export const { useLoginMutation, useGetProfileQuery, usePatchProfileMutation, usePatchAvatarMutation, useSignupMutation } =
-  authApi
+export const {
+  useLoginMutation,
+  useConfirmPasswordMutation,
+  useResetMutation,
+  useGetProfileQuery,
+  usePatchProfileMutation,
+  usePatchAvatarMutation,
+  useSignupMutation,
+} = authApi
