@@ -206,7 +206,7 @@ const ProfilePage = () => {
             <div className='uppercase text-primary-black text-base'>Basic information</div>
             <div className='flex flex-col gap-7 w-full sm:w-full'>
               <div className='w-full flex flex-col gap-1'>
-                <Label text='First name' />
+                <Label text='First name' required />
                 <Input
                   error={errors.first_name}
                   placeholder='First name'
@@ -220,7 +220,7 @@ const ProfilePage = () => {
                 {errors.first_name && <span className='text-red-500 text-xs'>{errors.first_name.message}</span>}
               </div>
               <div className='w-full flex flex-col gap-1'>
-                <Label text='Last name' />
+                <Label text='Last name' required />
                 <Input
                   error={errors.last_name}
                   placeholder='Last name'
@@ -234,7 +234,7 @@ const ProfilePage = () => {
                 {errors.last_name && <span className='text-red-500 text-xs'>{errors.last_name.message}</span>}
               </div>
               <div className='w-full flex flex-col gap-1'>
-                <Label text='Email' />
+                <Label text='Email' required />
                 <Input
                   error={errors.email}
                   placeholder='Please enter your email'
@@ -286,7 +286,7 @@ const ProfilePage = () => {
               <form onSubmit={handleSubmitPassword(onSubmitPasswordChange)} className='flex flex-col gap-5'>
                 <div className='flex flex-col gap-7 w-full sm:w-full'>
                   <div className='w-full flex flex-col gap-1'>
-                    <label>Current Password</label>
+                    <Label text='Current Password' required />
                     <Input
                       error={errorsPassword.current_password}
                       placeholder='Current Password'
@@ -300,7 +300,7 @@ const ProfilePage = () => {
                     )}
                   </div>
                   <div className='w-full flex flex-col gap-1'>
-                    <Label text='New Password' />
+                    <Label text='New Password' required />
                     <div className='relative'>
                       <Input
                         error={errorsPassword.new_password}
@@ -335,7 +335,7 @@ const ProfilePage = () => {
                   </div>
 
                   <div className='w-full flex flex-col gap-1'>
-                    <label>Confirm New Password</label>
+                    <Label text='Confirm New Password' required />
                     <Input
                       error={errorsPassword.confirm_password}
                       placeholder='Confirm New Password'
