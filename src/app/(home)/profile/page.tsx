@@ -266,7 +266,7 @@ const ProfilePage = () => {
                 <Controller
                   name='birthdate'
                   control={control}
-                  render={({ field }) => <DatePicker value={field.value} onChange={field.onChange} placeholder='yyyy-MM-DD' />}
+                  render={({ field }) => <DatePicker value={field.value} onChange={field.onChange} placeholder='DD/MM/YYYY' />}
                 />
               </div>
               <div className='flex gap-6'>
