@@ -97,7 +97,7 @@ const AddressBookPage = () => {
         {showShippingForm && (
           <form onSubmit={handleSubmit(onSubmit)} className='grid grid-cols-2 gap-6 mt-4'>
             <div>
-              <Label required text='First name'>
+              <Label required text='First name' />
               <Input {...register('shipping_address.firstName', { required: 'First name is required' })} />
               {errors?.shipping_address?.firstName && (
                 <span className='text-red-500'>{errors.shipping_address.firstName.message}</span>
@@ -111,31 +111,31 @@ const AddressBookPage = () => {
               )}
             </div>
             <div>
-              <Label required text="Address"/>
+              <Label required text='Address' />
               <Input {...register('shipping_address.address', { required: 'Address is required' })} />
               {errors?.shipping_address?.address && (
                 <span className='text-red-500'>{errors.shipping_address.address.message}</span>
               )}
             </div>
             <div>
-              <Label text="Region" required/>
+              <Label text='Region' required />
               <Input {...register('shipping_address.region', { required: 'Region is required' })} />
               {errors?.shipping_address?.region && <span className='text-red-500'>{errors.shipping_address.region.message}</span>}
             </div>
             <div>
-              <Label text="Apartment" required/>
+              <Label text='Apartment' required />
               <Input {...register('shipping_address.apartment', { required: 'Apartment is required' })} />
               {errors?.shipping_address?.apartment && (
                 <span className='text-red-500'>{errors.shipping_address.apartment.message}</span>
               )}
             </div>
             <div>
-              <Label text="State" required/>
+              <Label text='State' required />
               <Input {...register('shipping_address.state', { required: 'State is required' })} />
               {errors?.shipping_address?.state && <span className='text-red-500'>{errors.shipping_address.state.message}</span>}
             </div>
             <div>
-              <Label text="City" required/>
+              <Label text='City' required />
               <Input {...register('shipping_address.city', { required: 'City is required' })} />
               {errors?.shipping_address?.city && <span className='text-red-500'>{errors.shipping_address.city.message}</span>}
             </div>
