@@ -4,7 +4,7 @@ import { Controller, useForm } from 'react-hook-form'
 import { Input } from '@/components/ui/Input/Input'
 import Label from '@/components/ui/Label/Label'
 import { Button } from '@/components/ui/Button/Button'
-import { useLoginMutation, useSignupMutation } from '@/api/Auth'
+import { useGoogleAuthMutation, useSignupMutation } from '@/api/Auth'
 import { useRouter } from 'next/navigation'
 import toast from 'react-hot-toast'
 import { TRegisterForm } from '@/types/types'
@@ -17,14 +17,13 @@ import { MaskedInput } from 'antd-mask-input'
 const RegistrationForm = () => {
   const router = useRouter()
   const [signup, { isLoading: loginLoading }] = useSignupMutation()
+  const [googleAuth, { isLoading: googleLoading }] = useGoogleAuthMutation()
   const [showPassword, setShowPassword] = useState(false)
 
   const {
     register,
     handleSubmit,
-    setValue,
     control,
-    trigger,
     watch,
     formState: { errors, isValid },
   } = useForm<TRegisterForm>({
@@ -52,8 +51,23 @@ const RegistrationForm = () => {
           dismiss={() => toast.dismiss(t.id)}
         />
       ))
+      console.error('Failed to register: ', err)
+    }
+  }
 
-      console.error('Failed to login: ', err)
+  const handleGoogleSignup = async () => {
+    try {
+      await googleAuth().unwrap()
+      router.push('/dashboard') // Перенаправляємо користувача на потрібну сторінку після успішної реєстрації
+    } catch (err: any) {
+      toast(t => (
+        <CustomToaster
+          variant='error'
+          message={`Google signup failed: ${err.data.detail ? err.data?.detail : 'Something went wrong'}`}
+          dismiss={() => toast.dismiss(t.id)}
+        />
+      ))
+      console.error('Google signup failed: ', err)
     }
   }
 
@@ -258,8 +272,8 @@ const RegistrationForm = () => {
             <Button type='button' variant={'outlineBlack'} className='size-8 p-2'>
               <MyxIcon name='facebook' width={16} height={16} />
             </Button>
-            <Button type='button' variant={'outlineBlack'} className='size-8 p-2'>
-              <MyxIcon name='google' width={16} height={16} />
+            <Button type='button' variant={'outlineBlack'} className='size-8 p-2' onClick={handleGoogleSignup}>
+              {googleLoading ? <ClipLoader size={16} color={'#000'} /> : <MyxIcon name='google' width={16} height={16} />}
             </Button>
           </div>
         </div>

@@ -12,7 +12,7 @@ const buttonVariants = cva(
       variant: {
         default: 'bg-primary-black text-white',
         outline: 'bg-background ring-1 ring-primary-red text-primary-red',
-        outlineBlack: 'bg-background text-black',
+        outlineBlack: 'bg-background text-black border border-primary-black',
         blackUnderline: 'border-0 bg-background text-black underline underline-offset-4',
         outlineGray: 'border border-gray-100 text-gray-300',
         light: 'border border-gray-300 text-gray-300 hover:bg-accent hover:text-accent-foreground',

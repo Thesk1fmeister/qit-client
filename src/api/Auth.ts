@@ -47,6 +47,15 @@ export const authApi = mainApi.injectEndpoints({
       },
       transformResponse: saveAuthToken,
     }),
+    googleAuth: builder.mutation({
+      query: data => {
+        return {
+          url: `user/social/google/`,
+          method: 'POST',
+          body: data,
+        }
+      },
+    }),
     getProfile: builder.query({
       query: () => ({
         url: `/user/me/`,
@@ -96,4 +105,5 @@ export const {
   usePatchProfileMutation,
   usePatchAvatarMutation,
   useSignupMutation,
+  useGoogleAuthMutation,
 } = authApi
