@@ -56,19 +56,7 @@ const RegistrationForm = () => {
   }
 
   const handleGoogleSignup = async () => {
-    try {
-      await googleAuth().unwrap()
-      router.push('/dashboard') // Перенаправляємо користувача на потрібну сторінку після успішної реєстрації
-    } catch (err: any) {
-      toast(t => (
-        <CustomToaster
-          variant='error'
-          message={`Google signup failed: ${err.data.detail ? err.data?.detail : 'Something went wrong'}`}
-          dismiss={() => toast.dismiss(t.id)}
-        />
-      ))
-      console.error('Google signup failed: ', err)
-    }
+    router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/accounts/google/login/?next=`)
   }
 
   return (
