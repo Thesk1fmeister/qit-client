@@ -56,7 +56,7 @@ const RegistrationForm = () => {
   }
 
   const handleGoogleSignup = async () => {
-    router.push(`${process.env.NEXT_PUBLIC_BASE_URL}/accounts/google/login/?next=`)
+    router.push(`/api/accounts/google/login/?next=`)
   }
 
   return (
