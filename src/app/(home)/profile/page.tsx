@@ -29,9 +29,10 @@ const ProfilePage = () => {
   const fileInputRef = useRef<HTMLInputElement>(null)
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [showPasswordForm, setShowPasswordForm] = useState(false)
-  const [showPassword, setShowPassword] = useState(false)
+  const [showCurrentPassword, setShowCurrentPassword] = useState(false)
+  const [showNewPassword, setShowNewPassword] = useState(false)
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-  // User Information Form
   const {
     register,
     reset,
@@ -254,8 +255,8 @@ const ProfilePage = () => {
                   render={({ field }) => (
                     <MaskedInput
                       {...field}
-                      mask='+1 (000) 000-0000'
-                      placeholder={'+1 (xxx) xxx-xxxx'}
+                      mask='+000 000 000 0000'
+                      placeholder='+xxx (xxx) xxx-xxxx'
                       className='flex h-[42px] w-full rounded-md border px-3 py-3 text-base outline-none mt-1 border-gray-300'
                     />
                   )}
@@ -285,27 +286,43 @@ const ProfilePage = () => {
             {showPasswordForm ? (
               <form onSubmit={handleSubmitPassword(onSubmitPasswordChange)} className='flex flex-col gap-5'>
                 <div className='flex flex-col gap-7 w-full sm:w-full'>
+                  {/* Current Password */}
                   <div className='w-full flex flex-col gap-1'>
                     <Label text='Current Password' required />
-                    <Input
-                      error={errorsPassword.current_password}
-                      placeholder='Current Password'
-                      type='password'
-                      {...registerPassword('current_password', {
-                        required: 'Current password is required',
-                      })}
-                    />
+                    <div className='relative'>
+                      <Input
+                        error={errorsPassword.current_password}
+                        placeholder='Current Password'
+                        type={showCurrentPassword ? 'text' : 'password'}
+                        {...registerPassword('current_password', {
+                          required: 'Current password is required',
+                        })}
+                      />
+                      <button
+                        type='button'
+                        onClick={() => setShowCurrentPassword(prev => !prev)}
+                        className='absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5'
+                      >
+                        {showCurrentPassword ? (
+                          <MyxIcon name='eye' width={16} height={16} />
+                        ) : (
+                          <MyxIcon name='eyeOff' width={16} height={16} />
+                        )}
+                      </button>
+                    </div>
                     {errorsPassword.current_password && (
                       <span className='text-red-500 text-xs'>{errorsPassword.current_password.message}</span>
                     )}
                   </div>
+
+                  {/* New Password */}
                   <div className='w-full flex flex-col gap-1'>
                     <Label text='New Password' required />
                     <div className='relative'>
                       <Input
                         error={errorsPassword.new_password}
                         placeholder='New Password'
-                        type={showPassword ? 'text' : 'password'}
+                        type={showNewPassword ? 'text' : 'password'}
                         {...registerPassword('new_password', {
                           required: 'New password is required',
                           minLength: { value: 8, message: 'Password must be at least 8 characters long' },
@@ -319,13 +336,13 @@ const ProfilePage = () => {
                       />
                       <button
                         type='button'
-                        onClick={() => setShowPassword(prev => !prev)}
+                        onClick={() => setShowNewPassword(prev => !prev)}
                         className='absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5'
                       >
-                        {showPassword ? (
-                          <span className='icon-eye' /> // Assuming you have an icon component
+                        {showNewPassword ? (
+                          <MyxIcon name='eye' width={16} height={16} />
                         ) : (
-                          <span className='icon-eyeOff' /> // Assuming you have an icon component
+                          <MyxIcon name='eyeOff' width={16} height={16} />
                         )}
                       </button>
                     </div>
@@ -334,17 +351,31 @@ const ProfilePage = () => {
                     )}
                   </div>
 
+                  {/* Confirm New Password */}
                   <div className='w-full flex flex-col gap-1'>
                     <Label text='Confirm New Password' required />
-                    <Input
-                      error={errorsPassword.confirm_password}
-                      placeholder='Confirm New Password'
-                      type='password'
-                      {...registerPassword('confirm_password', {
-                        required: 'Please confirm your new password',
-                        validate: value => value === watchPassword('new_password') || 'Passwords do not match',
-                      })}
-                    />
+                    <div className='relative'>
+                      <Input
+                        error={errorsPassword.confirm_password}
+                        placeholder='Confirm New Password'
+                        type={showConfirmPassword ? 'text' : 'password'}
+                        {...registerPassword('confirm_password', {
+                          required: 'Please confirm your new password',
+                          validate: value => value === watchPassword('new_password') || 'Passwords do not match',
+                        })}
+                      />
+                      <button
+                        type='button'
+                        onClick={() => setShowConfirmPassword(prev => !prev)}
+                        className='absolute inset-y-0 right-0 pr-3 flex items-center text-sm leading-5'
+                      >
+                        {showConfirmPassword ? (
+                          <MyxIcon name='eye' width={16} height={16} />
+                        ) : (
+                          <MyxIcon name='eyeOff' width={16} height={16} />
+                        )}
+                      </button>
+                    </div>
                     {errorsPassword.confirm_password && (
                       <span className='text-red-500 text-xs'>{errorsPassword.confirm_password.message}</span>
                     )}
