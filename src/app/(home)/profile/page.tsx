@@ -294,6 +294,7 @@ const ProfilePage = () => {
                         error={errorsPassword.current_password}
                         placeholder='Current Password'
                         type={showCurrentPassword ? 'text' : 'password'}
+                        //@ts-ignore
                         {...register('current_password', {
                           required: 'Password is required',
                           maxLength: {
@@ -304,7 +305,7 @@ const ProfilePage = () => {
                             value: 8,
                             message: 'Password must be at least 8 characters',
                           },
-                          validate: value => {
+                          validate: (value: any) => {
                             if (!/[^\u0400-\u04FF]/.test(value)) {
                               return 'Please verify that you are entering the correct password.'
                             }

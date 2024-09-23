@@ -233,7 +233,7 @@ const RegistrationForm = () => {
             )}
           </div>
           <div className='flex flex-col'>
-            <Button type='submit' disabled={!isValid} className='!bg-primary-black'>
+            <Button type='submit' disabled={!isValid}>
               {loginLoading ? <ClipLoader size={24} color={'#fff'} /> : 'Sign Up'}
             </Button>
           </div>
@@ -274,7 +274,7 @@ const RegistrationForm = () => {
       <div className='flex gap-2 justify-center mt-[52px]'>
         Already have an account?
         <Link className='text-system-primary cursor-pointer' href={`/auth`}>
-          Sign Up
+          Sign In
         </Link>
       </div>
     </div>
