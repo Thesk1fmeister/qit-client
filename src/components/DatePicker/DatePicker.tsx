@@ -16,7 +16,7 @@ type TDatePickerProps = {
   className?: string
   formatType?: string
 }
-export function DatePicker({ value, onChange, placeholder, className, formatType = 'MM/dd/yyyy' }: TDatePickerProps) {
+export function DatePicker({ value, onChange, placeholder, className, formatType = 'MM/dd' }: TDatePickerProps) {
   const [isPopoverOpen, setIsPopoverOpen] = useState(false)
 
   const handleSelectDate = (date: any) => {

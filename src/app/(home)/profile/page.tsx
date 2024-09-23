@@ -75,7 +75,7 @@ const ProfilePage = () => {
       }
 
       if (data.birthdate) {
-        data.birthdate = format(new Date(data.birthdate), 'yyyy-MM-dd')
+        data.birthdate = format(new Date(data.birthdate), 'MM-dd')
       }
       delete data.avatar
       await patchProfile(data).unwrap()
@@ -267,7 +267,7 @@ const ProfilePage = () => {
                 <Controller
                   name='birthdate'
                   control={control}
-                  render={({ field }) => <DatePicker value={field.value} onChange={field.onChange} placeholder='DD/MM/YYYY' />}
+                  render={({ field }) => <DatePicker value={field.value} onChange={field.onChange} placeholder='MM/dd' />}
                 />
               </div>
               <div className='flex gap-6'>
@@ -294,8 +294,25 @@ const ProfilePage = () => {
                         error={errorsPassword.current_password}
                         placeholder='Current Password'
                         type={showCurrentPassword ? 'text' : 'password'}
-                        {...registerPassword('current_password', {
-                          required: 'Current password is required',
+                        {...register('current_password', {
+                          required: 'Password is required',
+                          maxLength: {
+                            value: 20,
+                            message: 'Password must be less than 20 characters',
+                          },
+                          minLength: {
+                            value: 8,
+                            message: 'Password must be at least 8 characters',
+                          },
+                          validate: value => {
+                            if (!/[^\u0400-\u04FF]/.test(value)) {
+                              return 'Please verify that you are entering the correct password.'
+                            }
+                            if (/\s/.test(value)) {
+                              return 'Password must not contain spaces'
+                            }
+                            return true
+                          },
                         })}
                       />
                       <button
