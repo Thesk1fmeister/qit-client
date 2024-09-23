@@ -34,6 +34,7 @@ import Copy from '@/public/icons/copy-icon.svg'
 import ChevronDown from '@/public/icons/chevron-down-icon.svg'
 import Facebook from '@/public/icons/facebook-icon.svg'
 import Google from '@/public/icons/google-icon.svg'
+import Event from '@/public/icons/event-icon.svg'
 // types
 import type { TIconConfig } from './types'
 
@@ -73,4 +74,5 @@ export const IconConfig: TIconConfig = {
   chevronDown: ChevronDown,
   facebook: Facebook,
   google: Google,
+  event: Event,
 }
