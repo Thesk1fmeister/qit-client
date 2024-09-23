@@ -250,7 +250,23 @@ const AddressBookPage = () => {
             </div>
             <div>
               <Label text='Zip code' required />
-              <Input placeholder='Zip code' {...register('shipping_address.zipCode', { required: 'Zip code is required' })} />
+              <Input
+                placeholder='Zip code'
+                {...register('shipping_address.zipCode', {
+                  pattern: {
+                    value: /^[0-9-]+$/,
+                    message: 'Zip code must contain only numbers and dashes',
+                  },
+                  minLength: {
+                    value: 4,
+                    message: 'Zip code must be at least 4 characters long',
+                  },
+                  maxLength: {
+                    value: 10,
+                    message: 'Zip code must be no longer than 10 characters',
+                  },
+                })}
+              />
               {errors?.shipping_address?.zipCode && (
                 <span className='text-red-500'>{errors.shipping_address.zipCode.message}</span>
               )}
@@ -372,7 +388,23 @@ const AddressBookPage = () => {
           </div>
           <div>
             <Label required text='Zip code' />
-            <Input placeholder='Zip code' {...register('billing_address.zipCode', { required: 'Zip code is required' })} />
+            <Input
+              placeholder='Zip code'
+              {...register('billing_address.zipCode', {
+                pattern: {
+                  value: /^[0-9-]+$/,
+                  message: 'Zip code must contain only numbers and dashes',
+                },
+                minLength: {
+                  value: 4,
+                  message: 'Zip code must be at least 4 characters long',
+                },
+                maxLength: {
+                  value: 10,
+                  message: 'Zip code must be no longer than 10 characters',
+                },
+              })}
+            />
             {errors?.billing_address?.zipCode && <span className='text-red-500'>{errors?.billing_address?.zipCode.message}</span>}
           </div>
           <div className='col-span-2 flex gap-4'>
