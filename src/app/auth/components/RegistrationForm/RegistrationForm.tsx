@@ -151,15 +151,15 @@ const RegistrationForm = () => {
                     'Please enter a valid phone number containing only numbers, spaces, parentheses, dashes, and the plus sign',
                 },
                 maxLength: {
-                  value: 17,
-                  message: 'Phone number must be at most 17 characters long',
+                  value: 20,
+                  message: 'Phone number must be at most 20 characters long',
                 },
               }}
               render={({ field }) => (
                 <MaskedInput
                   {...field}
-                  mask={'+1 (000) 000-0000'}
-                  placeholder='+1 (xxx) xxx-xxxx'
+                  mask='+000 000 000 0000'
+                  placeholder='+xxx (xxx) xxx-xxxx'
                   id='phone'
                   type='text'
                   className='flex h-[50px] w-full rounded-md border px-3 py-3 text-base outline-none mt-1 border-gray-300 focus:outline-none focus-visible:outline-none focus:border-none'
