@@ -60,6 +60,10 @@ const RegistrationForm = () => {
     router.push(`${baseURL}accounts/google/login/?next=`)
   }
 
+  const handleFacebookSignup = async () => {
+    router.push(`${baseURL}accounts/facebook/login/?next=`)
+  }
+
   return (
     <div className='flex flex-col gap-4'>
       <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
@@ -258,7 +262,7 @@ const RegistrationForm = () => {
             <div className='w-full border-b border-gray-300'></div>
           </div>
           <div className='flex items-center justify-center gap-4'>
-            <Button type='button' variant={'outlineBlack'} className='size-8 p-2'>
+            <Button type='button' variant={'outlineBlack'} className='size-8 p-2' onClick={handleFacebookSignup}>
               <MyxIcon name='facebook' width={16} height={16} />
             </Button>
             <Button type='button' variant={'outlineBlack'} className='size-8 p-2' onClick={handleGoogleSignup}>
@@ -269,7 +273,7 @@ const RegistrationForm = () => {
       </form>
       <div className='flex gap-2 justify-center mt-[52px]'>
         Already have an account?
-        <Link className='text-system-primary' href={`/auth`}>
+        <Link className='text-system-primary cursor-pointer' href={`/auth`}>
           Sign Up
         </Link>
       </div>
