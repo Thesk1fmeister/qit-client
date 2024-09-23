@@ -13,6 +13,7 @@ import { MyxIcon } from '@/components/icons'
 import CustomToaster from '@/components/CustomToaster/CustomToaster'
 import Link from 'next/link'
 import { MaskedInput } from 'antd-mask-input'
+import { baseURL } from '@/api/baseUrl'
 
 const RegistrationForm = () => {
   const router = useRouter()
@@ -56,7 +57,7 @@ const RegistrationForm = () => {
   }
 
   const handleGoogleSignup = async () => {
-    router.push(`/api/accounts/google/login/?next=`)
+    router.push(`${baseURL}accounts/google/login/?next=`)
   }
 
   return (
