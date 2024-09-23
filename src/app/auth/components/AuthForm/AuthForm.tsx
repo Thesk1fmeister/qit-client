@@ -12,6 +12,7 @@ import ClipLoader from 'react-spinners/ClipLoader'
 import { MyxIcon } from '@/components/icons'
 import CustomToaster from '@/components/CustomToaster/CustomToaster'
 import Link from 'next/link'
+import { baseURL } from '@/api/baseUrl'
 
 const AuthForm = () => {
   const router = useRouter()
@@ -69,6 +70,14 @@ const AuthForm = () => {
 
       console.error('Failed to login: ', err)
     }
+  }
+
+  const handleGoogleSignup = async () => {
+    router.push(`${baseURL}accounts/google/login/?next=`)
+  }
+
+  const handleFacebookSignup = async () => {
+    router.push(`${baseURL}accounts/facebook/login/?next=`)
   }
 
   return (
@@ -166,10 +175,10 @@ const AuthForm = () => {
             <div className='w-full border-b border-gray-300'></div>
           </div>
           <div className='flex items-center justify-center gap-4'>
-            <Button type='button' variant={'outlineBlack'} className='size-8 p-2'>
+            <Button type='button' variant={'outlineBlack'} className='size-8 p-2' onClick={handleFacebookSignup}>
               <MyxIcon name='facebook' width={16} height={16} />
             </Button>
-            <Button type='button' variant={'outlineBlack'} className='size-8 p-2'>
+            <Button type='button' variant={'outlineBlack'} className='size-8 p-2' onClick={handleGoogleSignup}>
               <MyxIcon name='google' width={16} height={16} />
             </Button>
           </div>
