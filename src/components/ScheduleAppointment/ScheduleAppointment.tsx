@@ -7,22 +7,19 @@ import { RadioGroup, RadioGroupItem } from '../ui/RadioGroup/radio-group'
 import { MyxIcon } from '../icons'
 import { cn } from '@/lib/utils'
 
-const ScheduleAppointment = () => {
+const ScheduleAppointment = ({ trigger }: { trigger: React.ReactNode }) => {
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date())
   const [selectedTime, setSelectedTime] = useState('10:00 am')
 
   const times = ['10:00 am', '11:00 am', '12:00 pm', '01:00 pm', '02:00 pm', '03:00 pm', '04:00 pm']
 
   const handleUpdateAppointment = () => {
-    // Logic for updating the appointment
     console.log('Updating appointment:', selectedDate, selectedTime)
   }
 
   return (
     <Dialog>
-      <DialogTrigger asChild>
-        <Button>Schedule Appointment</Button>
-      </DialogTrigger>
+      <DialogTrigger asChild>{trigger}</DialogTrigger>
       <DialogContent className='max-w-[728px] w-full px-[64px] h-auto'>
         <DialogHeader>
           <DialogTitle className='text-[32px]'>Schedule</DialogTitle>
@@ -32,7 +29,7 @@ const ScheduleAppointment = () => {
         </DialogHeader>
         <div className='flex gap-10'>
           {/* //@ts-ignore */}
-          <Calendar selected={selectedDate} onSelect={setSelectedDate} className='w-full' />
+          <Calendar selected={selectedDate} onSelect={setSelectedDate} className='w-full' classNames={null} />
           <div className='max-w-[134px] w-full'>
             <RadioGroup value={selectedTime} onValueChange={setSelectedTime} className='flex flex-col gap-1'>
               {times.map(time => (
